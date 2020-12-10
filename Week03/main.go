@@ -8,6 +8,6 @@ import (
 
 func main() {
 	graceful.AddShutDownHook(app.Start(), func() {
-		app.Stop()
+		<-app.Stop()
 	})
 }

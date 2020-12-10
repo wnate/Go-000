@@ -72,12 +72,11 @@ func Start() context.Context {
 	return ctx
 }
 
-func Stop() {
+func Stop() <- chan struct{} {
 	stopOnce.Do(func() {
 		close(stopCh)
 	})
-	// 等待通知可以退出
-	<-exitCh
+	return exitCh
 }
 
 // 如果返回的 exitCh 不为空，需要等待收到通知，才表示服务器完成shutdown
