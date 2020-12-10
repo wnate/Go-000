@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	_ "net/http/pprof"
 	"sync"
 	"time"
 )
@@ -72,7 +73,7 @@ func Start() context.Context {
 	return ctx
 }
 
-func Stop() <- chan struct{} {
+func Stop() <-chan struct{} {
 	stopOnce.Do(func() {
 		close(stopCh)
 	})
